@@ -83,7 +83,7 @@ public class BakedModelGun implements IBakedModel
     {
         return this.modelMain.isBuiltInRenderer();
     }
-    
+
     @Override
     public boolean isGui3d()
     {

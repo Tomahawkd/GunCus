@@ -182,7 +182,7 @@ public class BakedModelGunFinalized implements IBakedModel
     {
         return this.modelMain.isBuiltInRenderer();
     }
-    
+
     @Override
     public boolean isGui3d()
     {
@@ -190,7 +190,7 @@ public class BakedModelGunFinalized implements IBakedModel
     }
     
     public static final Matrix4f NULL_MATRIX = new Matrix4f();
-    
+
     @Override
     public Pair<? extends IBakedModel, Matrix4f> handlePerspective(TransformType transformType)
     {

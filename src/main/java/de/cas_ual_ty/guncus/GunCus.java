@@ -4,6 +4,8 @@ import java.util.List;
 
 import de.cas_ual_ty.guncus.command.CommandGunCus;
 import de.cas_ual_ty.guncus.itemgroup.ItemGroupGunCus;
+import de.cas_ual_ty.guncus.network.MessageBulletMaker;
+import de.cas_ual_ty.guncus.network.MessageGunMaker;
 import de.cas_ual_ty.guncus.network.MessageHitmarker;
 import de.cas_ual_ty.guncus.network.MessageShoot;
 import de.cas_ual_ty.guncus.registries.GunCusItems;
@@ -38,7 +40,7 @@ public class GunCus
     public static IProxy proxy;
     public static SimpleChannel channel;
     
-    public static final boolean FULL_CREATIVE_TABS = false;
+    public static final boolean FULL_CREATIVE_TABS = true;
     
     public static final ItemGroupGunCus ITEM_GROUP_GUN_CUS = new ItemGroupGunCus();
     
@@ -66,6 +68,8 @@ public class GunCus
             GunCus.PROTOCOL_VERSION::equals);
         GunCus.channel.registerMessage(0, MessageShoot.class, MessageShoot::encode, MessageShoot::decode, MessageShoot::handle);
         GunCus.channel.registerMessage(1, MessageHitmarker.class, MessageHitmarker::encode, MessageHitmarker::decode, MessageHitmarker::handle);
+        GunCus.channel.registerMessage(2, MessageGunMaker.class, MessageGunMaker::encode, MessageGunMaker::decode, MessageGunMaker::handle);
+        GunCus.channel.registerMessage(3, MessageBulletMaker.class, MessageBulletMaker::encode, MessageBulletMaker::decode, MessageBulletMaker::handle);
         
         GunCusUtility.fixPOITypeBlockStates(GunCusPointOfInterestTypes.ARMS_DEALER);
         

@@ -1,12 +1,13 @@
 package de.cas_ual_ty.guncus.block;
 
 import de.cas_ual_ty.guncus.GunCus;
-import de.cas_ual_ty.guncus.container.ContainerGunTable;
+import de.cas_ual_ty.guncus.container.ContainerGunMaker;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.inventory.container.SimpleNamedContainerProvider;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
@@ -14,11 +15,11 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
-public class BlockGunTable extends Block {
-	public static final ITextComponent TITLE_GUN_TABLE =
-			new TranslationTextComponent("container." + GunCus.MOD_ID + ".gun_table");
+public class BlockGunMaker extends Block {
+	public static final ITextComponent TITLE_GUN_MAKER =
+			new TranslationTextComponent("container." + GunCus.MOD_ID + ".gun_maker");
 
-	public BlockGunTable(Properties properties) {
+	public BlockGunMaker(Properties properties) {
 		super(properties);
 	}
 
@@ -36,6 +37,6 @@ public class BlockGunTable extends Block {
 	@Override
 	public INamedContainerProvider getContainer(BlockState state, World worldIn, BlockPos pos) {
 		return new SimpleNamedContainerProvider((windowId, inv, player) ->
-				new ContainerGunTable(windowId, inv, pos), BlockGunTable.TITLE_GUN_TABLE);
+				new ContainerGunMaker(windowId, inv, pos), BlockGunMaker.TITLE_GUN_MAKER);
 	}
 }

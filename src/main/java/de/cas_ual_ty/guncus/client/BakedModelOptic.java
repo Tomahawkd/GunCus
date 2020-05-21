@@ -71,7 +71,7 @@ public class BakedModelOptic implements IBakedModel
     {
         return this.modelMain.isBuiltInRenderer();
     }
-    
+
     @Override
     public boolean isGui3d()
     {
