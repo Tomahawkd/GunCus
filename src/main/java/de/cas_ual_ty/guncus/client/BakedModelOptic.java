@@ -3,7 +3,9 @@ package de.cas_ual_ty.guncus.client;
 import java.util.List;
 import java.util.Random;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import javax.vecmath.Matrix4f;
+
+import org.apache.commons.lang3.tuple.Pair;
 
 import de.cas_ual_ty.guncus.item.attachments.Optic;
 import net.minecraft.block.BlockState;
@@ -69,13 +71,7 @@ public class BakedModelOptic implements IBakedModel
     {
         return this.modelMain.isBuiltInRenderer();
     }
-    
-    @Override
-    public boolean func_230044_c_()
-    {
-        return this.modelMain.func_230044_c_();
-    }
-    
+
     @Override
     public boolean isGui3d()
     {
@@ -83,7 +79,7 @@ public class BakedModelOptic implements IBakedModel
     }
     
     @Override
-    public IBakedModel handlePerspective(TransformType transformType, MatrixStack mat)
+    public Pair<? extends IBakedModel, Matrix4f> handlePerspective(TransformType transformType)
     {
         if(transformType == TransformType.FIRST_PERSON_RIGHT_HAND)
         {
@@ -96,14 +92,11 @@ public class BakedModelOptic implements IBakedModel
                 
                 if(optic != null && optic.canAim())
                 {
-                    mat.push();
-                    mat.scale(0, 0, 0);
-                    return this;
+                    return Pair.of(this, BakedModelGunFinalized.NULL_MATRIX);
                 }
             }
         }
         
-        this.modelMain.handlePerspective(transformType, mat);
-        return this;
+        return Pair.of(this, this.modelMain.handlePerspective(transformType).getRight());
     }
 }

@@ -14,15 +14,17 @@ import net.minecraftforge.registries.ObjectHolder;
 
 @EventBusSubscriber(modid = GunCus.MOD_ID, bus = Bus.MOD)
 @ObjectHolder(GunCus.MOD_ID)
-public class GunCusVillagerProfessions
-{
-    public static final VillagerProfession ARMS_DEALER = null;
-    
-    @SubscribeEvent
-    public static void registerVillagerProfessions(Register<VillagerProfession> event)
-    {
-        IForgeRegistry<VillagerProfession> registry = event.getRegistry();
-        
-        registry.register(GunCusUtility.villagerProfession("arms_dealer", GunCusPointOfInterestTypes.ARMS_DEALER, ImmutableSet.of(), ImmutableSet.of(), null).setRegistryName(GunCus.MOD_ID, "arms_dealer"));
-    }
+public class GunCusVillagerProfessions {
+	public static final VillagerProfession ARMS_DEALER = null;
+
+	@SubscribeEvent
+	public static void registerVillagerProfessions(Register<VillagerProfession> event) {
+		IForgeRegistry<VillagerProfession> registry = event.getRegistry();
+
+		registry.register(
+				GunCusUtility.villagerProfession("arms_dealer",
+						GunCusPointOfInterestTypes.ARMS_DEALER,
+						ImmutableSet.of(), ImmutableSet.of())
+						.setRegistryName(GunCus.MOD_ID, "arms_dealer"));
+	}
 }

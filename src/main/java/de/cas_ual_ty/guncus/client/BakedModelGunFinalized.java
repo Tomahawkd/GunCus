@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import javax.vecmath.Matrix4f;
+
+import org.apache.commons.lang3.tuple.Pair;
 
 import de.cas_ual_ty.guncus.item.ItemAttachment;
 import de.cas_ual_ty.guncus.item.ItemGun;
@@ -12,7 +14,6 @@ import de.cas_ual_ty.guncus.item.attachments.EnumAttachmentType;
 import de.cas_ual_ty.guncus.item.attachments.Optic;
 import de.cas_ual_ty.guncus.item.attachments.Paint;
 import net.minecraft.block.BlockState;
-import net.minecraft.client.renderer.Matrix4f;
 import net.minecraft.client.renderer.model.BakedQuad;
 import net.minecraft.client.renderer.model.IBakedModel;
 import net.minecraft.client.renderer.model.ItemCameraTransforms.TransformType;
@@ -181,21 +182,17 @@ public class BakedModelGunFinalized implements IBakedModel
     {
         return this.modelMain.isBuiltInRenderer();
     }
-    
-    @Override
-    public boolean func_230044_c_()
-    {
-        return this.modelMain.func_230044_c_();
-    }
-    
+
     @Override
     public boolean isGui3d()
     {
         return this.modelMain.isGui3d();
     }
     
+    public static final Matrix4f NULL_MATRIX = new Matrix4f();
+
     @Override
-    public IBakedModel handlePerspective(TransformType transformType, MatrixStack mat)
+    public Pair<? extends IBakedModel, Matrix4f> handlePerspective(TransformType transformType)
     {
         if(transformType == TransformType.FIRST_PERSON_RIGHT_HAND)
         {
@@ -210,17 +207,19 @@ public class BakedModelGunFinalized implements IBakedModel
                 
                 if(gun.getNBTCanAimGun(itemStack) && optic.canAim())
                 {
-                    if(!optic.isDefault())
+                    if(optic.isDefault())
                     {
-                        mat.push();
-                        mat.scale(0, 0, 0);
-                        return this;
+                        //						return Pair.of(this, this.aimMatrix);
+                        return Pair.of(this, this.modelMain.handlePerspective(transformType).getRight());
+                    }
+                    else
+                    {
+                        return Pair.of(this, BakedModelGunFinalized.NULL_MATRIX);
                     }
                 }
             }
         }
         
-        this.modelMain.handlePerspective(transformType, mat);
-        return this;
+        return Pair.of(this, this.modelMain.handlePerspective(transformType).getRight());
     }
 }

@@ -1,6 +1,6 @@
 package de.cas_ual_ty.guncus.client.gui;
 
-import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.platform.GlStateManager;
 
 import de.cas_ual_ty.guncus.GunCus;
 import de.cas_ual_ty.guncus.container.ContainerBulletMaker;
@@ -67,8 +67,8 @@ public class GuiContainerBulletMaker extends ContainerScreen<ContainerBulletMake
         String text = this.title.getFormattedText();
         this.font.drawString(text, (float)(this.xSize - this.font.getStringWidth(text)) * 0.5F, 6.0F, 0x404040);
         this.font.drawString(this.playerInventory.getDisplayName().getFormattedText(), 8.0F, (float)(this.ySize - 96 + 2), 0x404040);
-        
-        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+
+        GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.minecraft.getTextureManager().bindTexture(GuiContainerBulletMaker.BULLET_MAKER_GUI_TEXTURES);
         
         Slot slotS;
@@ -98,7 +98,7 @@ public class GuiContainerBulletMaker extends ContainerScreen<ContainerBulletMake
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
     {
-        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+        GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.minecraft.getTextureManager().bindTexture(GuiContainerBulletMaker.BULLET_MAKER_GUI_TEXTURES);
         int i = this.guiLeft;
         int j = (this.height - this.ySize) / 2;
