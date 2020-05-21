@@ -20,13 +20,13 @@ public class MessageBulletMaker
     
     public static void encode(MessageBulletMaker msg, PacketBuffer buf)
     {
-        buf.writeString(msg.modid);
-        buf.writeString(msg.name);
+        buf.writeString(msg.modid, 32767);
+        buf.writeString(msg.name, 32767);
     }
     
     public static MessageBulletMaker decode(PacketBuffer buf)
     {
-        return new MessageBulletMaker(buf.readString(), buf.readString());
+        return new MessageBulletMaker(buf.readString(32767), buf.readString(32767));
     }
     
     public static void handle(MessageBulletMaker msg, Supplier<Context> ctx)

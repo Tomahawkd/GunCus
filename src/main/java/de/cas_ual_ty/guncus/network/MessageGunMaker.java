@@ -20,13 +20,13 @@ public class MessageGunMaker
     
     public static void encode(MessageGunMaker msg, PacketBuffer buf)
     {
-        buf.writeString(msg.modid);
-        buf.writeString(msg.name);
+        buf.writeString(msg.modid, 32767);
+        buf.writeString(msg.name, 32767);
     }
     
     public static MessageGunMaker decode(PacketBuffer buf)
     {
-        return new MessageGunMaker(buf.readString(), buf.readString());
+        return new MessageGunMaker(buf.readString(32767), buf.readString(32767));
     }
     
     public static void handle(MessageGunMaker msg, Supplier<Context> ctx)
